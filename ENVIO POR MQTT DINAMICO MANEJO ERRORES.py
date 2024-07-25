@@ -1,5 +1,5 @@
-#%%%%%%%%%%%%%%%%%%%GATEWAY QUE ENVIO DINAMICO A UBIDOTS PROTOCOLO MQTT%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-#%%%%%%%%%%%%%%%%%%%%%%%%%%-----Declaracion de bibliotecas------%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#%%%%%%%%%%%%%%%%%%%RASPBERRY PI SEND DATA TO UBIDOTS USING MQTT PROTOCOL%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#%%%%%%%%%%%%%%%%%%%%%%%%%%-----libraries------%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 from __future__ import print_function
 import serial.tools.list_ports
@@ -15,8 +15,8 @@ import time
 connected = False  # Stores the connection status
 BROKER_ENDPOINT = "industrial.api.ubidots.com"
 PORT = 1883
-MQTT_USERNAME = "BBFF-9KgO8GzbaRne04jStWGrBXNcYrETCA"  # Put here your TOKEN
-MQTT_PASSWORD = "abc"
+MQTT_USERNAME = ""  # Put here your TOKEN
+MQTT_PASSWORD = ""
 TOPIC = "/v1.6/devices/"
 DEVICE_LABEL = "gateway-pi"
 VARIABLE_LABEL_1 = "id-nodo1"
@@ -39,7 +39,7 @@ battery = ""
 idnode = ""
 infer = ""
 temp = ""
-# Define un tamaño máximo para el buffer
+# define  buffer lenght
 MAX_BUFFER_SIZE = 3  # Puedes ajustar esto según tus necesidades
 # Define un intervalo de tiempo (en segundos) para el envío
 TIME_INTERVAL = 15  # Puedes ajustar esto según tus necesidades
