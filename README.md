@@ -41,6 +41,7 @@ PROJECT
   This development board is known for its efficient design and has one of the lowest power consumptions on the market (compared to other ESP32 development boards).
   I will also include the schematic diagram of the development board. 
 
+![image](https://github.com/user-attachments/assets/372f1dea-35d2-477e-a00e-dc21b0f9267d)
 
 
 
@@ -61,6 +62,7 @@ Characteristics
   Shelf Life: Up to 10 years (depending on storage conditions)
   Energy Density: High energy density, providing long-lasting power
   Self-Discharge Rate: Extremely low, less than 1% per year at 20°C
+![image](https://github.com/user-attachments/assets/6eac9058-ef2a-4c09-ba03-3cfe1518e5d0)
 
 
 "MEMS" SENSOR
@@ -74,6 +76,10 @@ Condition monitoring
 The last application is of great interest to us. I've included the wiring diagram for the sensor.
 Now that we've chosen our hardware, our next step is to develop an algorithm. This algorithm will form the foundation for building the program that our development kit will run, piece by piece.
 The main idea behind the algorithm is to break down the project into smaller more manageable tasks that are easier to tackle.
+
+![image](https://github.com/user-attachments/assets/46f5e4a9-25c2-483a-b85e-c1a43c9a96b0)
+
+
 
 The key building blocks include:
 
@@ -91,6 +97,7 @@ Some of these blocks might seem complex right now, but as we move forward with t
 So, at first glance, the diagram for the first half of the project would look like this. That's clear; as you can see, this is the design of the TinyML sensor.
 
 
+![image](https://github.com/user-attachments/assets/d48e5988-1515-4afe-81c4-b8cfaaa02aaf)
 
 
 
@@ -99,6 +106,7 @@ We will start by developing the functions for each of the aforementioned blocks.
 The final algorithm can give a better idea of ​​how the different functions interact. and gives a better understanding of the internal blocks handled by the tinyML sensor
 
 
+![image](https://github.com/user-attachments/assets/92fa2ff9-b7e8-48df-82bd-d2e48c482bd7)
 
 
 
@@ -114,6 +122,7 @@ Validation and Optimization: Check how well your model performs and adjust setti
 Library Generation: Once satisfied with the model, generate a library tailored to your chosen hardware platform within Edge Impulse.
 Integration and Deployment: Integrate the generated library into your hardware project and deploy it onto your device. This enables your device to make real-time predictions.
 
+![image](https://github.com/user-attachments/assets/ed284180-a392-4c05-997a-f609289df995)
 
 For data collection, I decided to set up a test bench using a 3/4HP single-phase motor. The main goal was to gather a comprehensive database of acceleration using my adxl355 sensor. I then formatted this data into CSV and added it to the EDGE IMPULSE workflow.
 
@@ -147,7 +156,7 @@ I've attached photos of my test bench setup and how I connected my load and smar
 As you can see, my smart sensor setup includes an ESP32, an ADXL355 evaluation board, a battery, and an antenna, all housed inside a box. I've also mounted it on a steel base to connect it securely to my AC motor.
 It's crucial to install the sensor properly on the engine to avoid excessive vibration, which could overwhelm the accelerometer's sensitive output. The ADXL355 is notably more precise than its smaller counterparts, so ensuring stable installation is key.
 
-
+![image](https://github.com/user-attachments/assets/2a2d8c48-9967-4cb9-b7f1-2443aff00d72)
 
 
 
@@ -156,6 +165,7 @@ A super important part of my project is to ensure a long life for the battery-po
 Below I present the first image which represents the current consumption graph of the smart sensor from start to finish. What do I mean by start to finish, I mean the complete process in which the sensor is in deep sleep, awake, executes all its tasks and then goes into deep sleep mode again until the condition that will wake up the embedded system again is met.
 This is a real current graph of my smart sensor:
 
+![image](https://github.com/user-attachments/assets/b935890d-eaa3-411a-b58f-a97e1b08bc41)
 
 
 power profiler graphs in blue the current consumed by my embedded system. As I mentioned before, this is the behavior of my smart sensor from the moment it wakes up until it goes back into deep sleep mode. It is essential that my embedded system does not have downtime when being in active mode since this would directly impact the battery life, so if any waiting period or time delay is needed, it must be done by setting the Intelligent sensor in deep sleep mode.
@@ -167,6 +177,7 @@ Now I will explain the behavior of the graph
 Initially, the embedded system is in low consumption or sleeping mode. The ADXL355 accelerometer sensor has a pin which was programmed to send a signal to the embedded system and wake it up as soon as the ADXL355 sensor detects changes in the acceleration values ​​in its x, y, z axes.
 Thus, once the sensor wakes up the embedded system, it changes to active mode and begins the first part of its tasks, which consist of setting certain internal blocks.
 
+![image](https://github.com/user-attachments/assets/50ff5275-c72c-4afc-8e9f-9e6ee449145b)
 
 
 Once this is finished, it will go to sleep again for approximately 5 seconds.
@@ -174,6 +185,7 @@ This time of 5 seconds is what I need in my experiments for the motor to start n
 As I said previously, in these 5 seconds the embedded system is in deep sleep mode, so battery consumption is minimal, 260 uA average.
 
 
+![image](https://github.com/user-attachments/assets/a7faa2d4-e20a-4f78-b3ca-f0831733bfee)
 
 
 
@@ -182,6 +194,7 @@ The next step is to feed the neural network algorithm with the spectrum of the s
 Once the data has been sent successfully, the embedded system configures certain control blocks and goes into deep sleep mode to save battery, until the conditions that wake it up are met and it starts the cycle again.
 
 
+![image](https://github.com/user-attachments/assets/7d0db254-5ba9-439e-8fd4-d58242f94056)
 
 
 
@@ -191,9 +204,15 @@ Subsequently, the ESP32 ´2´ unpacks the espnow data packet and, using a UART-U
 UBIDOTS displays this data in a dashboard that I designed myself. UBIDOTS offers an intuitive and easy-to-use interface, but you have to add the creativity!
 This is a real image of what my dashboard looks like.
 
+![image](https://github.com/user-attachments/assets/38d1663e-b695-42ef-a7ea-4fd183e36775)
 
 
 As you can see, in the dashboard we have an indicator block that tells us the ID of the sensor, we also have an indicator of the real battery of the device, and finally a graph in which we have 5 behavior states (good condition, imbalance condition, stoppage and abnormal condition) which help us know the health status of the induction motor.
+
+![image](https://github.com/user-attachments/assets/e2af8fcd-bd2c-4bce-8704-65429fbeb21c)
+
+
+
 
 My future plans include four main goals:
 
